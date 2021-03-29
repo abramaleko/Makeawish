@@ -18,6 +18,20 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        /* Removes arrow keys in input type number*/
+            /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+    }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -34,6 +48,14 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('home') }}">{{ __('Home') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('requests') }}">{{ __('Requests') }}</a>
+                        </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -45,7 +67,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -79,5 +101,9 @@
             @yield('content')
         </main>
     </div>
+
+
+    <script src="https://use.fontawesome.com/467df1d241.js"></script>
+
 </body>
 </html>

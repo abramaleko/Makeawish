@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Wishes;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +24,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $wishes=Wishes::orderBy('id','desc')->paginate(3);
+        return view('home',['wishes'=> $wishes]);
+    }
+
+    //get all the user requests
+    public function request()
+    {
+         $wishes=Wishes::where('user_id',Auth::id())->orderBy('id','desc')->get();
+        return view('request',['wishes'=> $wishes]);
+    }
+
+    public function Uploadrequest(Request $request )
+    {
+       $request->validate([
+        'description' => 'required|string|max:255',
+        'amount' => 'required|integer'
+        ]);
+
+        $ins= new Wishes();
+        $ins->description=$request->description;
+        $ins->amount=$request->amount;
+        $ins->user_id=$request->user()->id;
+        $ins->save();
+        return redirect()->route('requests')->with('status','Request submitted successfully');
     }
 }
