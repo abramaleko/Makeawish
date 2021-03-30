@@ -29,7 +29,7 @@
                     <td>{{$wish->amount}}</td>
                     <td>{{$wish->status}}</td>
                     <td>{{$wish->created_at->format('d M Y')}}</td>
-                    <td><a href="" class="btn btn-success btn-sm px-3"><i class="fa fa-check"></i>&nbsp; Grant</a></td>
+                    <td><a href="{{route('request-grant',$wish->id)}}" class="btn btn-success btn-sm px-3 {{$wish->status=='Granted'? 'disabled' : ''}}"><i class="fa fa-check"></i>&nbsp; Grant</a></td>
                   </tr>
                 @endforeach
             </tbody>

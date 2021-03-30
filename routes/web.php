@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::redirect('/', '/home');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -24,3 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request'])->name('requests');
 
 Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Uploadrequest'])->name('upload-request');
+
+Route::get('/request/grant/{id}',[App\Http\Controllers\HomeController::class, 'requestGrant'])->name('request-grant');

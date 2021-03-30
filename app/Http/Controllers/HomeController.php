@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $wishes=Wishes::orderBy('id','desc')->paginate(3);
+        $wishes=Wishes::where('status','Pending')->orderBy('id','desc')->paginate(3);
         return view('home',['wishes'=> $wishes]);
     }
 
@@ -48,5 +48,13 @@ class HomeController extends Controller
         $ins->user_id=$request->user()->id;
         $ins->save();
         return redirect()->route('requests')->with('status','Request submitted successfully');
+    }
+
+    public function requestGrant($id)
+    {
+      $wish=Wishes::find($id);
+      $wish->status="Granted";
+      $wish->save();
+      return back();
     }
 }
