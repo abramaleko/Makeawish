@@ -72,6 +72,7 @@ class HomeController extends Controller
        return view('request',['wish'=> $wish]);
     }
 
+    //updates the request
     public function updateRequest(Request $request)
     {
         $wish=Wishes::find($request->wish_id);
@@ -82,6 +83,14 @@ class HomeController extends Controller
         $wish->amount=$request->amount;
         $wish->save();
         return redirect()->route('requests')->with('status','Request updated successfully');
+    }
+
+    public function deleteRequest($id)
+    {
+        $wish=Wishes::find($id);
+        $wish->forceDelete();
+
+        return redirect()->route('requests')->with('status','Request deleted successfully');
 
     }
 }

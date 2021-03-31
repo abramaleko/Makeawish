@@ -29,3 +29,6 @@ Route::get('/request/grant/{id}',[App\Http\Controllers\HomeController::class, 'r
 Route::get('/request', [App\Http\Controllers\HomeController::class, 'getWish'])->name('request');
 
 Route::post('/request/update', [App\Http\Controllers\HomeController::class, 'updateRequest'])->name('update-request');
+
+Route::get('/request/delete/{id}', [App\Http\Controllers\HomeController::class, 'deleteRequest'])->name('delete-request');
+
