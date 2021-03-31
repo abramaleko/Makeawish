@@ -18,7 +18,7 @@ class CreateWishesTable extends Migration
             $table->bigInteger('reference_code');
             $table->string('name');
             $table->string('email');
-            $table->bigInteger('phone_number');
+            $table->string('phone_number');
             $table->float('amount', 8, 2);
             $table->longText('description');
             $table->string('status')->default('Pending');
