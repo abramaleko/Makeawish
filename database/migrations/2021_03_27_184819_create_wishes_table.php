@@ -15,8 +15,10 @@ class CreateWishesTable extends Migration
     {
         Schema::create('wishes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('reference_code');
+            $table->string('name');
+            $table->string('email');
+            $table->bigInteger('phone_number');
             $table->float('amount', 8, 2);
             $table->longText('description');
             $table->string('status')->default('Pending');
