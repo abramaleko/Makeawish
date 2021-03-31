@@ -31,7 +31,17 @@ class HomeController extends Controller
     //get the requests page
     public function request()
     {
-        return view('request');
+        if(Auth::user()->admin == true)
+        {
+            $wishes=Wishes::orderBy('id','desc')->get();
+            return view('request',['wishes'=> $wishes]);
+        }
+
+        else
+        {
+            return view('request');
+        }
+
     }
 
 
@@ -68,8 +78,8 @@ class HomeController extends Controller
     //get the searched wish
     public function getWish(Request $request)
     {
-       $wish=Wishes::where('reference_code',$request->reference_code)->first();
-       return view('request',['wish'=> $wish]);
+       $wishes=Wishes::where('reference_code',$request->reference_code)->get();
+       return view('request',['wishes'=> $wishes]);
     }
 
     //updates the request

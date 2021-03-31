@@ -20,18 +20,22 @@
           </ul>
          </div>
          @endif
-        <div class="my-3">
-            <form class="form-inline" method="get" action="{{route('request')}}">
-                 <label class="sr-only" for="reference_code">Reference number</label>
-                 <div class="input-group mb-2 mr-sm-2">
-                   <div class="input-group-prepend">
-                     <div class="input-group-text"><i class="fa fa-search"></i></div>
-                   </div>
-                   <input type="number" name="reference_code" class="form-control" id="reference_code" placeholder="Enter your reference number">
-                 </div>
-                 <button type="submit" class="btn btn-outline-secondary mb-2">Search</button>
-               </form>
-        </div>
+
+       @if ((Auth::user()->admin) == false)
+       {{-- checks if the current user is  an common user --}}
+       <div class="my-3">
+        <form class="form-inline" method="get" action="{{route('request')}}">
+             <label class="sr-only" for="reference_code">Reference number</label>
+             <div class="input-group mb-2 mr-sm-2">
+               <div class="input-group-prepend">
+                 <div class="input-group-text"><i class="fa fa-search"></i></div>
+               </div>
+               <input type="number" name="reference_code" class="form-control" id="reference_code" placeholder="Enter your reference number">
+             </div>
+             <button type="submit" class="btn btn-outline-secondary mb-2">Search</button>
+           </form>
+    </div>
+       @endif
     <div class="table-responsive-sm">
         <table class="table table-hover">
             <caption>Details of your request</caption>
@@ -51,7 +55,8 @@
               </tr>
             </thead>
             <tbody>
-                @isset($wish)
+                @isset($wishes)
+                @foreach ($wishes as $wish)
                 <tr>
                     <td>{{$wish->reference_code}}</td>
                     <td>{{$wish->name}}</td>
@@ -64,9 +69,8 @@
                     {{-- <td><a href="{{route('request-grant',$wish->id)}}" class="btn btn-success btn-sm px-3 {{$wish->status=='Granted'? 'disabled' : ''}}"><i class="fa fa-check"></i>&nbsp; Grant</a></td> --}}
                    <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger">Delete</a></td>
                    <td><a class="btn btn-success" role="button" data-toggle="modal" data-target="#wish-detail">View</a></td>
-
-
                 </tr>
+                @endforeach
                 @endisset
             </tbody>
           </table>
