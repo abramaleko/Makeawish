@@ -33,8 +33,11 @@ class HomeController extends Controller
     {
         if(Auth::user()->admin == true)
         {
+            //get all wishes
             $wishes=Wishes::orderBy('id','desc')->get();
-            return view('request',['wishes'=> $wishes]);
+
+            $granted=Wishes::where('status','Granted')->count();
+            return view('request',['wishes'=> $wishes,'granted'=>$granted]);
         }
 
         else
@@ -67,12 +70,15 @@ class HomeController extends Controller
         return redirect()->route('requests')->with('status','Your reference number for the submitted request is '.$reference_code);
     }
 
-    public function requestGrant($id)
+    public function requestGrant(Request $request)
     {
-      $wish=Wishes::find($id);
+      $wish=Wishes::find($request->id);
       $wish->status="Granted";
+      $wish->grant_name=ucfirst($request->name);
+      $wish->grant_email=$request->email;
+      $wish->grant_phone_number=$request->phone_no;
       $wish->save();
-      return back();
+      return back()->with('status','Congratulations on granting '.$wish->name.' request 🙏');
     }
 
     //get the searched wish

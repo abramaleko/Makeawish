@@ -22,6 +22,9 @@ class CreateWishesTable extends Migration
             $table->float('amount', 8, 2);
             $table->longText('description');
             $table->string('status')->default('Pending');
+            $table->string('grant_name')->nullable();
+            $table->string('grant_email')->nullable();
+            $table->string('grant_phone_number')->nullable();
             $table->timestamps();
         });
     }

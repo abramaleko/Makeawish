@@ -9,8 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -40,7 +39,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm" style="font-family: 'Playfair Display', serif;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="margin-right: 3rem !important;">
+                <a class="navbar-brand mr-lg-5" href="{{ url('/') }}">
                     <img src="{{asset('icons/logo.png')}}" style="height: 3rem;
                     width: 3.4rem;" >
                     {{ config('app.name', 'Laravel') }}
@@ -102,8 +101,10 @@
         </main>
     </div>
 
-
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://use.fontawesome.com/467df1d241.js"></script>
+    @yield('scripts')
 
 </body>
 </html>

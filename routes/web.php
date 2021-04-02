@@ -24,7 +24,7 @@ Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request'])
 
 Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Uploadrequest'])->name('upload-request');
 
-Route::get('/request/grant/{id}',[App\Http\Controllers\HomeController::class, 'requestGrant'])->name('request-grant');
+Route::get('/request/grant',[App\Http\Controllers\HomeController::class, 'requestGrant'])->name('request-grant');
 
 Route::get('/request', [App\Http\Controllers\HomeController::class, 'getWish'])->name('request');
 
