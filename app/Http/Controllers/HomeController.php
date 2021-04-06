@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReferenceMail;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,12 @@ class HomeController extends Controller
         'amount' => 'required|integer'
         ]);
          $reference_code=mt_rand(100000,999000);
+         $mail_data=array(
+             'name' => ucfirst($request->name),
+             'email' => $request->email,
+             'reference_code' => $reference_code
+         );
+         ReferenceMail::dispatch($mail_data);
         $ins= new Wishes();
         $ins->reference_code=$reference_code;
         $ins->name=ucfirst($request->name);
