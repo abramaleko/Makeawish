@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/mail', function () {
 
+    $mail_data=array(
+        'name' => 'Abraham Maleko',
+        'reference_code' => 929541
+    );
+    return new App\Mail\WishGrantedMail($mail_data);
+});
 
 
 Route::redirect('/', '/home');
@@ -26,7 +33,7 @@ Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Upl
 
 Route::get('/request/grant',[App\Http\Controllers\HomeController::class, 'requestGrant'])->name('request-grant');
 
-Route::get('/request', [App\Http\Controllers\HomeController::class, 'getWish'])->name('request');
+Route::get('/request/{id}', [App\Http\Controllers\HomeController::class, 'getWish'])->name('request');
 
 Route::post('/request/update', [App\Http\Controllers\HomeController::class, 'updateRequest'])->name('update-request');
 

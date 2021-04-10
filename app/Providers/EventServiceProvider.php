@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ReferenceMail;
+use App\Events\WishGrantedMail;
 use App\Listeners\SendReferenceNumber;
+use App\Listeners\SendGrantedMail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ReferenceMail::class => [
             SendReferenceNumber::class,
+        ],
+        WishGrantedMail::class => [
+            SendGrantedMail::class,
         ],
     ];
 

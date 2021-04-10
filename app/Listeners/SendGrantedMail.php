@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Listeners;
+
+use App\Events\WishGrantedMail;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\OrderReference;
-use App\Events\ReferenceMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendReferenceNumber
+class SendGrantedMail
 {
     /**
      * Create the event listener.
@@ -16,19 +16,18 @@ class SendReferenceNumber
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
      * Handle the event.
      *
-     * @param  ReferenceMail  $event
+     * @param  WishGrantedMail  $event
      * @return void
      */
-    public function handle(ReferenceMail $event)
+    public function handle(WishGrantedMail $event)
     {
-        dd($event->mail_data['email']);
-        //creates a mailable instance
-        Mail::to($event->mail_data['email'])->send(new OrderReference($event->mail_data));
+         //creates a mailable instance
+         Mail::to($event->mail_data['email'])->send(new \App\Mail\WishGrantedMail($event->mail_data));
     }
 }

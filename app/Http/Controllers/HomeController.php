@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ReferenceMail;
+use App\Events\WishGrantedMail;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,16 @@ class HomeController extends Controller
     public function requestGrant(Request $request)
     {
       $wish=Wishes::find($request->id);
+
+      //populates the array with the requestee name,grant_name,the grant_email and reference code
+      $mail_data=array(
+        'grant_name' => ucfirst($request->name),
+        'email' => $wish->email,
+        'name' => $wish->name,
+        'reference_code' => $wish->reference_code
+    );
+    WishGrantedMail::dispatch($mail_data);
+
       $wish->status="Granted";
       $wish->grant_name=ucfirst($request->name);
       $wish->grant_email=$request->email;
@@ -89,9 +100,9 @@ class HomeController extends Controller
     }
 
     //get the searched wish
-    public function getWish(Request $request)
+    public function getWish($id)
     {
-       $wishes=Wishes::where('reference_code',$request->reference_code)->get();
+       $wishes=Wishes::where('reference_code',$id)->get();
        return view('request',['wishes'=> $wishes]);
     }
 

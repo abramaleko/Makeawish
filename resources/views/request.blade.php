@@ -24,16 +24,16 @@
        @if ((Auth::user()->admin) == false)
        {{-- checks if the current user is  an common user --}}
        <div class="my-3">
-        <form class="form-inline" method="get" action="{{route('request')}}">
+        <form class="form-inline">
              <label class="sr-only" for="reference_code">Reference number</label>
              <div class="input-group mb-2 mr-sm-2">
                <div class="input-group-prepend">
                  <div class="input-group-text"><i class="fa fa-search"></i></div>
                </div>
-               <input type="number" name="reference_code" class="form-control" id="reference_code" placeholder="Enter your reference number">
+               <input type="number" class="form-control" id="code" placeholder="Enter your reference number">
              </div>
-             <button type="submit" class="btn btn-outline-secondary mb-2">Search</button>
-           </form>
+             <button type="button" class="btn btn-outline-secondary mb-2" id="reference_code">Search</button>
+        </form>
     </div>
        @endif
        @if ((Auth::user()->admin) == true)
@@ -181,5 +181,21 @@
         </div>
 
 </div>
+@endsection
 
+@section('scripts')
+  <script>
+      document.getElementById('reference_code').addEventListener('click',function(event)
+      {
+        let ref=document.getElementById('code').value;
+        if (ref== '') {
+           event.preventDefault();
+        }
+        else
+        {
+            // redirect to the reqest page
+             window.location.href = "/request/"+ref;
+        }
+      });
+  </script>
 @endsection
