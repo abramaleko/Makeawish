@@ -7,6 +7,7 @@ use App\Events\WishGrantedMail;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -125,6 +126,33 @@ class HomeController extends Controller
         $wish->forceDelete();
 
         return redirect()->route('requests')->with('status','Request deleted successfully');
-
     }
+
+    //shows the my stats page
+    public function stats()
+    {
+        return view('stats');
+    }
+
+    //searchs for the requestee_names
+    public function requestee_names(Request $request)
+    {
+        $name =Wishes::query()
+        ->select('name')
+        ->where('name', 'LIKE', "%{$request->name}%")
+        ->get();
+        return response()->json($name);
+    }
+
+     //searchs for the request info
+     public function requestInfo(Request $request)
+     {
+       $info=Wishes::select('name','amount','status','created_at')->where('name',$request->name)->orderBy('id','desc')->get();
+       $granted=Wishes::where('name',$request->name)->where('status','Granted')->count();
+        $data=array([
+            'info' => $info,
+             'granted' =>$granted
+        ]);
+       return json_encode($data);
+     }
 }

@@ -29,6 +29,7 @@
       <div class="modal fade" id="wish-grant{{$wish->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <form action="{{route('request-grant')}}" method="GET">
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Grant {{$wish->name}} wish</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -36,8 +37,6 @@
             </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('request-grant')}}" method="GET">
-
                     <input type="hidden" value="{{$wish->id}}" name="id">
                     <div class="form-group mb-2">
                         <label for="name">Name</label>

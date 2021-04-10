@@ -12,15 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/mail', function () {
-
-    $mail_data=array(
-        'name' => 'Abraham Maleko',
-        'reference_code' => 929541
-    );
-    return new App\Mail\WishGrantedMail($mail_data);
-});
-
 
 Route::redirect('/', '/home');
 Auth::routes(['register' => false]);
@@ -28,6 +19,8 @@ Auth::routes(['register' => false]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request'])->name('requests');
+
+Route::get('/statistics', [App\Http\Controllers\HomeController::class, 'stats'])->name('stats');
 
 Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Uploadrequest'])->name('upload-request');
 
@@ -39,3 +32,6 @@ Route::post('/request/update', [App\Http\Controllers\HomeController::class, 'upd
 
 Route::get('/request/delete/{id}', [App\Http\Controllers\HomeController::class, 'deleteRequest'])->name('delete-request');
 
+Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requestee_names'])->name('requestee-names');
+
+Route::post('/request_info', [App\Http\Controllers\HomeController::class, 'requestInfo'])->name('request-info');

@@ -34,6 +34,7 @@
         -moz-appearance: textfield;
     }
     </style>
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -57,9 +58,21 @@
                             <a class="nav-link  {{Request::path() == 'home' ? 'active' : ''}}" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link {{Request::path() == 'requests' ? 'active' : ''}}" href="{{ route('requests') }}">{{ __('Requests') }}</a>
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {{Request::path() == 'requests' || Request::path() == 'statistics' ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Wishes') }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('requests') }}">Requests</a>
+                              <div class="dropdown-divider"></div>
+                              @auth
+                              @if ((Auth::user()->admin) == false)
+                              {{-- if user is not admin --}}
+                              <a class="dropdown-item" href="{{ route('stats') }}">My stats</a>
+                               @endif
+                              @endauth
+                            </div>
+                          </li>
 
                     </ul>
 

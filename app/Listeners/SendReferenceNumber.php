@@ -27,7 +27,6 @@ class SendReferenceNumber
      */
     public function handle(ReferenceMail $event)
     {
-        dd($event->mail_data['email']);
         //creates a mailable instance
         Mail::to($event->mail_data['email'])->send(new OrderReference($event->mail_data));
     }
