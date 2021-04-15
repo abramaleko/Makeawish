@@ -23,7 +23,7 @@
             <p class="card-text">{{$wish->description}}</p>
             <p class=" mt-1 mb-2" style="font-size:16px">Amount needed: <span class="font-weight-bold">&nbsp;₹ {{$wish->amount}}</span></p>
             <p class="my-2 text-muted" style="font-size: 12px"><i>Created : {{$wish->created_at->diffForHumans()}}</i></p>
-            <a class="btn btn-success block" role="button" data-toggle="modal" data-target="#wish-grant{{$wish->id}}">Grant Wish</a>
+            <a class="btn btn-success block" role="button" data-toggle="modal" data-target="#wish-grant{{$wish->id}}">Fulfil</a>
 
                 {{-- Modal for granting user wish --}}
       <div class="modal fade" id="wish-grant{{$wish->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,7 +31,7 @@
         <div class="modal-content">
             <form action="{{route('request-grant')}}" method="GET">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Grant {{$wish->name}} wish</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Fulfil {{$wish->name}} wish</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

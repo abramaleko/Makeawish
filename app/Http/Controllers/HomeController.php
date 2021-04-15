@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Wishes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
+
 class HomeController extends Controller
 {
     /**
@@ -97,7 +99,7 @@ class HomeController extends Controller
       $wish->grant_email=$request->email;
       $wish->grant_phone_number=$request->phone_no;
       $wish->save();
-      return back()->with('status','Congratulations on granting '.$wish->name.' request 🙏');
+      return back()->with('status','Thank you for fulfilling'.$wish->name.' wish 🙏');
     }
 
     //get the searched wish
@@ -154,5 +156,16 @@ class HomeController extends Controller
              'granted' =>$granted
         ]);
        return json_encode($data);
+     }
+
+     public function requestPdf()
+     {
+        $wishes=Wishes::orderBy('id','desc')->get();
+
+        $granted=Wishes::where('status','Granted')->count();
+
+        $pdf = PDF::loadView('pdf.wishes',compact('wishes','granted'));
+
+        return $pdf->stream('wishes.pdf');
      }
 }

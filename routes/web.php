@@ -35,3 +35,5 @@ Route::get('/request/delete/{id}', [App\Http\Controllers\HomeController::class, 
 Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requestee_names'])->name('requestee-names');
 
 Route::post('/request_info', [App\Http\Controllers\HomeController::class, 'requestInfo'])->name('request-info');
+
+Route::get('/pdf/wishes', [App\Http\Controllers\HomeController::class, 'requestPdf'])->name('request-pdf');
