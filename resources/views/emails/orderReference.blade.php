@@ -23,7 +23,7 @@
         <img src="{{asset('icons/logo.png')}}" >
     </div>
     <p id="header">Hello {{$mail_data['name']}},</p>
-    <p>You have recently submitted a wish of reference number  {{$mail_data['reference_code']}} this reference number can be used to see the status of your wish <a href="{{route('request',$mail_data['reference_code'])}}">Click here for more details</a></p>
+    <p>Congratulations, your wish of reference number {{$mail_data['reference_code']}} has been approved by our team <a href="{{route('request',$mail_data['reference_code'])}}">Click here to view the wish</a></p>
     <p>Thanks,</p>
     <p>V-Group</p>
 </div>

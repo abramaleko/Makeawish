@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ReferenceMail;
+use App\Events\DeclineMail;
 use App\Events\WishGrantedMail;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
@@ -19,7 +20,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth');
     }
 
     /**
@@ -60,26 +61,60 @@ class HomeController extends Controller
          'name' =>  'required',
          'email' => 'required|email',
          'phone_no' => 'required|string',
+         'employee_code' => 'required',
         'description' => 'required|string|max:255',
         'amount' => 'required|integer'
         ]);
          $reference_code=mt_rand(100000,999000);
-         $mail_data=array(
-             'name' => ucfirst($request->name),
-             'email' => $request->email,
-             'reference_code' => $reference_code
-         );
-         ReferenceMail::dispatch($mail_data);
-        $ins= new Wishes();
+         $ins= new Wishes();
         $ins->reference_code=$reference_code;
         $ins->name=ucfirst($request->name);
         $ins->email=$request->email;
         $ins->phone_number=$request->phone_no;
+        $ins->employee_code=$request->employee_code;
         $ins->description=$request->description;
         $ins->amount=$request->amount;
         $ins->save();
-        return redirect()->route('requests')->with('status','Your reference number for the submitted request is '.$reference_code);
+        return redirect()->route('requests')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
     }
+
+    public function approveRequest($id)
+    {
+      $wish=Wishes::find($id);
+      $mail_data=array(
+        'name' => ucfirst($wish->name),
+        'email' => $wish->email,
+        'reference_code' => $wish->reference_code ,
+    );
+      ReferenceMail::dispatch($mail_data);
+
+      $wish->status= "Pending wish";
+      $wish->save();
+
+      return redirect()->route('requests')->with('status','You have successfully approve '.$wish->name. ' wish' );
+
+    }
+
+    public function declineRequest(Request $request)
+    {
+       $request->validate([
+               'decline_reason' => 'required|string',
+           ]
+       );
+       $wish=Wishes::find($request->wish_id);
+       $mail_data=array(
+        'name' => ucfirst($wish->name),
+        'email' => $wish->email,
+        'reference_code' => $wish->reference_code ,
+    );
+       DeclineMail::dispatch($mail_data);
+       $wish->decline_reason=$request->decline_reason;
+       $wish->status= 'Declined';
+       $wish->save();
+
+       return redirect()->route('requests')->with('status','A note with decline note has been sent to the requestee email');
+    }
+
 
     public function requestGrant(Request $request)
     {
@@ -109,9 +144,18 @@ class HomeController extends Controller
        return view('request',['wishes'=> $wishes]);
     }
 
-    //updates the request
+    //updates the wish
     public function updateRequest(Request $request)
     {
+        $request->validate([
+            'name' =>  'required',
+            'email' => 'required|email',
+            'phone_no' => 'required|string',
+            'employee_code' => 'required',
+           'description' => 'required|string|max:255',
+           'amount' => 'required|integer'
+           ]);
+
         $wish=Wishes::find($request->wish_id);
         $wish->name=ucfirst($request->name);
         $wish->email=$request->email;

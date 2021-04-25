@@ -31,6 +31,10 @@ Route::post('/request/update', [App\Http\Controllers\HomeController::class, 'upd
 
 Route::get('/request/delete/{id}', [App\Http\Controllers\HomeController::class, 'deleteRequest'])->name('delete-request');
 
+Route::get('/request/approve/{id}', [App\Http\Controllers\HomeController::class, 'approveRequest'])->name('approve-request');
+
+Route::post('/request/decline', [App\Http\Controllers\HomeController::class, 'declineRequest'])->name('decline-request');
+
 Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requestee_names'])->name('requestee-names');
 
 Route::post('/request_info', [App\Http\Controllers\HomeController::class, 'requestInfo'])->name('request-info');
