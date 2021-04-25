@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $wishes=Wishes::where('status','Pending')->orderBy('id','desc')->paginate(3);
+        $wishes=Wishes::where('status','Pending wisha')->orderBy('id','desc')->paginate(3);
         return view('home',['wishes'=> $wishes]);
     }
 
