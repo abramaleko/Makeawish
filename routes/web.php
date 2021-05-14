@@ -17,9 +17,13 @@ Auth::routes(['register' => false]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/wishes', [App\Http\Controllers\HomeController::class, 'wishes'])->name('wishes');
+
 Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request'])->name('requests');
 
 Route::get('/statistics', [App\Http\Controllers\HomeController::class, 'stats'])->name('stats');
+
+Route::get('/all/statistics', [App\Http\Controllers\HomeController::class, 'allStats'])->name('all-stats');
 
 Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Uploadrequest'])->name('upload-request');
 
@@ -40,3 +44,8 @@ Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requ
 Route::post('/request_info', [App\Http\Controllers\HomeController::class, 'requestInfo'])->name('request-info');
 
 Route::get('/pdf/wishes', [App\Http\Controllers\HomeController::class, 'requestPdf'])->name('request-pdf');
+
+Route::get('/filter/wishes', [App\Http\Controllers\HomeController::class, 'filterWishes'])->name('filter-wishes');
+
+Route::resource('/experience',App\Http\Controllers\ExperienceController::class);
+

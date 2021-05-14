@@ -58,21 +58,27 @@
                             <a class="nav-link  {{Request::path() == 'home' ? 'active' : ''}}" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'wishes' ? 'active' : ''}}" href="{{ route('wishes') }}">{{ __('Wishes') }}</a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle {{Request::path() == 'requests' || Request::path() == 'statistics' ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('Wishes') }}
+                                {{ __('Requests') }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{ route('requests') }}">Requests</a>
+                              <a class="dropdown-item" href="{{ route('requests') }}">Wish requests</a>
                               <div class="dropdown-divider"></div>
-                              @auth
-                              @if ((Auth::user()->admin) == false)
-                              {{-- if user is not admin --}}
                               <a class="dropdown-item" href="{{ route('stats') }}">My stats</a>
-                               @endif
-                              @endauth
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{{ route('all-stats') }}">All stats</a>
                             </div>
                           </li>
+
+                          <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'experience.index' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Experience') }}</a>
+                        </li>
+
 
                     </ul>
 

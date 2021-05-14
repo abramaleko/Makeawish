@@ -30,8 +30,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $wishes=Wishes::where('status','Pending wisha')->orderBy('id','desc')->paginate(3);
-        return view('home',['wishes'=> $wishes]);
+        return view('home');
+    }
+
+    //shows all wishes
+    public function wishes()
+    {
+        $wishes=Wishes::where('status','Pending wish')->orderBy('id','desc')->paginate(3);
+        return view('wishes',['wishes'=> $wishes]);
     }
 
     //get the requests page
@@ -178,6 +184,50 @@ class HomeController extends Controller
     public function stats()
     {
         return view('stats');
+    }
+
+    public function allStats()
+    {
+        $wishes=Wishes::orderBy('id','desc')->get();
+        $granted=Wishes::where('status','Granted')->count();
+        return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+    }
+
+    public function filterWishes(Request $request)
+    {
+      switch($request->filter)
+      {
+          case '1':
+            $wishes=Wishes::orderBy('id','desc')->get();
+            $granted=Wishes::where('status','Granted')->count();
+            return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+            break;
+           case '2':
+            $wishes=Wishes::orderBy('amount','desc')->get();
+            $granted=Wishes::where('status','Granted')->count();
+            return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+               break;
+            case '3':
+                $wishes=Wishes::orderBy('amount','asc')->get();
+                $granted=Wishes::where('status','Granted')->count();
+                return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                break;
+                case '4':
+                    $wishes=Wishes::where('status','Granted')->get();
+                    $granted=Wishes::where('status','Granted')->count();
+                    return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                    break;
+                  case '5':
+                    $wishes=Wishes::where('status','Pending wish')->get();
+                    $granted=Wishes::where('status','Granted')->count();
+                    return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                      break;
+                     case '6':
+                        $wishes=Wishes::latest()->get();
+                        $granted=Wishes::where('status','Granted')->count();
+                        return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                         break;
+      }
     }
 
     //searchs for the requestee_names

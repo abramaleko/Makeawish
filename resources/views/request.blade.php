@@ -7,9 +7,11 @@
         {{ session('status') }}
     </div>
 @endif
-    <div class="my-4">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newWish"><i class="fa fa-plus"></i>&nbsp;Request a New Wish</button>
-    </div>
+      @if ((Auth::user()->admin) == false)
+        <div class="my-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newWish"><i class="fa fa-plus"></i>&nbsp;Request a New Wish</button>
+        </div>
+      @endif
      {{-- displays all errors --}}
       @if ($errors->any())
       <div class="alert alert-danger">
@@ -22,7 +24,7 @@
          @endif
 
        @if ((Auth::user()->admin) == false)
-       {{-- checks if the current user is  an common user --}}
+       {{-- checks if the current user is  common user --}}
        <div class="my-3">
         <form class="form-inline">
              <label class="sr-only" for="reference_code">Reference number</label>
@@ -74,7 +76,7 @@
                     @if ((Auth::user()->admin) == true)
                     <td><a href="{{route('approve-request',$wish->id)}}" class="btn btn-primary rounded {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">Approve</a></td>
 
-                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{$wish->status == 'Declined' ? 'disabled' : ''}}">Decline</a></td>
+                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{($wish->status != 'Declined' || $wish->status != 'Pending approval')  ? 'disabled' : ''}}">Decline</a></td>
                     @endif
                    <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">Details</a></td>
                    <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">Delete</a></td>
