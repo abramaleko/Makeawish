@@ -76,7 +76,7 @@
                           </li>
 
                           <li class="nav-item">
-                            <a class="nav-link  {{Request::path() == 'experience.index' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Experience') }}</a>
+                            <a class="nav-link  {{Request::path() == 'experience' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Feedback') }}</a>
                         </li>
 
 

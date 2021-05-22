@@ -28,8 +28,7 @@
 <div class="container">
     <div class="border border-secondary px-3 mt-5 py-2">
         <p class="home-message mt-3 text-justify">
-            Hello and welcome to Make a wish foundation which is a part of V-group initiated by Mr.Advait Jajodia. This is website is specifically designed for V-Group employees, this unique idea was brought to life by our Managing director of V-group Mr. Advait Jajodia where any employee can freely ask for wishes following a few steps and his wishes can be seen and also be granted by any other employee from all corners of the establishment.
-        </p>
+            Make-a-wish Foundation is a part of the V-group initiated by Mr. Vishal Jajodia. The proposed website is a platform specially designed for V-Group employees to write their wishes which would be fulfilled by anyone amongst the group only. It is a very unique idea adopted by  Mr. Advait Jajodia son of Mr. Vishal Jajodia Managing Director of V Group where an employee can freely put his wish in simple steps and he will be pleased to see the fulfillment of his wish from any corner of the establishment.        </p>
         <p class="home-message mt-3 text-justify">
             You are all welcome to use V-Group Make a wish  web application 👐
         </p>

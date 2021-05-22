@@ -92,13 +92,18 @@ class HomeController extends Controller
         'email' => $wish->email,
         'reference_code' => $wish->reference_code ,
     );
-      ReferenceMail::dispatch($mail_data);
 
-      $wish->status= "Pending wish";
-      $wish->save();
+     try {
 
+        ReferenceMail::dispatch($mail_data);
+     }
+     catch (\Swift_TransportException $th) {
+         //catch if the no internet connection
+         return redirect()->route('requests')->with('error','Failed to approve '.$wish->name.' wish please check your internet connection and try again.');
+     }
+        $wish->status= "Pending wish";
+         $wish->save();
       return redirect()->route('requests')->with('status','You have successfully approve '.$wish->name. ' wish' );
-
     }
 
     public function declineRequest(Request $request)
@@ -113,7 +118,13 @@ class HomeController extends Controller
         'email' => $wish->email,
         'reference_code' => $wish->reference_code ,
     );
-       DeclineMail::dispatch($mail_data);
+       try {
+        DeclineMail::dispatch($mail_data);
+       } catch (\Swift_TransportException $th) {
+         //catch if the error in internet connection
+        return redirect()->route('requests')->with('error','Failed to decline '.$wish->name.' wish please check your internet connection and try again.');
+    }
+
        $wish->decline_reason=$request->decline_reason;
        $wish->status= 'Declined';
        $wish->save();
@@ -133,7 +144,12 @@ class HomeController extends Controller
         'name' => $wish->name,
         'reference_code' => $wish->reference_code
     );
-    WishGrantedMail::dispatch($mail_data);
+    try {
+        WishGrantedMail::dispatch($mail_data);
+    } catch (\Swift_TransportException $th) {
+         //catch if the error in internet connection
+         return back()->with('error','Failed to grant '.$wish->name.' wish please check your internet connection and try again.');
+    }
 
       $wish->status="Granted";
       $wish->grant_name=ucfirst($request->name);

@@ -2,11 +2,16 @@
 
 @section('content')
 <div class="container">
-    @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
     </div>
-@endif
+    @endif
       @if ((Auth::user()->admin) == false)
         <div class="my-4">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newWish"><i class="fa fa-plus"></i>&nbsp;Request a New Wish</button>
@@ -39,12 +44,14 @@
     </div>
        @endif
        @if ((Auth::user()->admin) == true)
-          <div class="my-3">
-              <h5 class="font-weight-bold">Completed wishes: <span class="text-primary">&nbsp; {{$granted}} / {{count($wishes)}}</span></h5>
-          </div>
-          <div class="my-3">
-              <a href="{{route('request-pdf')}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;PRINT</a>
-          </div>
+         @if (! Request::routeIs('request'))
+         <div class="my-3">
+            <h5 class="font-weight-bold">Completed wishes: <span class="text-primary">&nbsp; {{$granted}} / {{count($wishes)}}</span></h5>
+        </div>
+        <div class="my-3">
+            <a href="{{route('request-pdf')}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;PRINT</a>
+        </div>
+         @endif
        @endif
     <div class="table-responsive-sm">
         <table class="table table-hover">
@@ -76,7 +83,7 @@
                     @if ((Auth::user()->admin) == true)
                     <td><a href="{{route('approve-request',$wish->id)}}" class="btn btn-primary rounded {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">Approve</a></td>
 
-                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{($wish->status != 'Declined' || $wish->status != 'Pending approval')  ? 'disabled' : ''}}">Decline</a></td>
+                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">Decline</a></td>
                     @endif
                    <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">Details</a></td>
                    <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">Delete</a></td>

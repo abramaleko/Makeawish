@@ -15,7 +15,7 @@
     </div>
     @endif
     <div class="my-3">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newExperience"><i class="fa fa-plus"></i>&nbsp;Add Experience</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newExperience"><i class="fa fa-plus"></i>&nbsp;Add Feedback</button>
     </div>
 
     <div class="card m-auto " id="experiences" style="width:45rem; border-radius:1rem;">
