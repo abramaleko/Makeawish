@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\ReferenceMail;
 use App\Events\DeclineMail;
 use App\Events\WishGrantedMail;
+use App\Exports\WishesExport;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use PDF;
 
 class HomeController extends Controller
@@ -277,5 +278,10 @@ class HomeController extends Controller
         $pdf = PDF::loadView('pdf.wishes',compact('wishes','granted'));
 
         return $pdf->stream('wishes.pdf');
+     }
+
+     public function requestExcel()
+     {
+        return Excel::download(new WishesExport, 'wishes.xlsx');
      }
 }

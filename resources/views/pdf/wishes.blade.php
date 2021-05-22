@@ -21,7 +21,6 @@ table {
         <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Reference number</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Amount</th>
@@ -32,7 +31,6 @@ table {
             <tbody>
                 @foreach ($wishes as $wish)
                 <tr>
-                    <td>{{$wish->reference_code}}</td>
                     <td>{{$wish->name}}</td>
                     <td>{{$wish->email}}</td>
                     <td>{{$wish->amount}}</td>

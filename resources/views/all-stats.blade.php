@@ -6,6 +6,7 @@
         </div>
         <div class="my-3">
             <a href="{{route('request-pdf')}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;PRINT</a>
+            <a href="{{route('request-excel')}}" target="_blank" class="btn btn-success px-3 ml-3">&nbsp;EXCEL FILE</a>
         </div>
         <div class="">
             <form class="form-inline" method="GET" action="{{route('filter-wishes')}}">
