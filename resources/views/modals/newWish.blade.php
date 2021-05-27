@@ -39,7 +39,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><img src="{{asset('icons/rupee.svg')}}" class="inline" width="11"></span>
                     </div>
-                    <input type="number" name="amount" class="form-control" aria-label="Amount" placeholder="Enter the amount needed for your need" >
+                    <input type="number" name="amount" class="form-control" aria-label="Amount" placeholder="Enter the amount needed for your need (Optional)" >
                   </div>
         </div>
         <div class="modal-footer">

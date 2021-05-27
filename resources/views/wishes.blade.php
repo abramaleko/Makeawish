@@ -21,7 +21,9 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{$wish->email}}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{$wish->phone_number}}</h6>
             <p class="card-text">{{$wish->description}}</p>
+            @if ($wish->amount != null)
             <p class=" mt-1 mb-2" style="font-size:16px">Amount needed: <span class="font-weight-bold">&nbsp;₹ {{$wish->amount}}</span></p>
+            @endif
             <p class="my-2 text-muted" style="font-size: 12px"><i>Created : {{$wish->created_at->diffForHumans()}}</i></p>
             <a class="btn btn-success block" role="button" data-toggle="modal" data-target="#wish-grant{{$wish->id}}">Fulfil</a>
 

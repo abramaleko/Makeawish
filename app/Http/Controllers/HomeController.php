@@ -71,7 +71,7 @@ class HomeController extends Controller
          'phone_no' => 'required|string',
          'employee_code' => 'required',
         'description' => 'required|string|max:255',
-        'amount' => 'required|integer'
+        'amount' => 'nullable|integer'
         ]);
          $reference_code=mt_rand(100000,999000);
          $ins= new Wishes();
