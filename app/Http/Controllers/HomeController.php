@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ReferenceMail;
 use App\Events\DeclineMail;
+use App\Events\NewRequest;
 use App\Events\WishGrantedMail;
 use App\Exports\WishesExport;
 use Illuminate\Http\Request;
@@ -74,15 +75,29 @@ class HomeController extends Controller
         ]);
          $reference_code=mt_rand(100000,999000);
          $ins= new Wishes();
-        $ins->reference_code=$reference_code;
-        $ins->name=ucfirst($request->name);
-        $ins->email=$request->email;
-        $ins->phone_number=$request->phone_no;
-        $ins->employee_code=$request->employee_code;
-        $ins->description=$request->description;
-        $ins->amount=$request->amount;
-        $ins->save();
-        return redirect()->route('requests')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
+
+         $mail_data=array(
+            'name' => ucfirst($request->name),
+            'email' => $request->email,
+            'reference_code' => $reference_code ,
+        );
+        try {
+
+            NewRequest::dispatch($mail_data);
+         }
+         catch (\Swift_TransportException $th) {
+             //catch if the no internet connection
+             return redirect()->route('requests')->with('error','Failed to submit your wish please check your internet connection and try again.');
+         }
+         $ins->reference_code=$reference_code;
+         $ins->name=ucfirst($request->name);
+         $ins->email=$request->email;
+         $ins->phone_number=$request->phone_no;
+         $ins->employee_code=$request->employee_code;
+         $ins->description=$request->description;
+         $ins->amount=$request->amount;
+         $ins->save();
+         return redirect()->route('requests')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
     }
 
     public function approveRequest($id)

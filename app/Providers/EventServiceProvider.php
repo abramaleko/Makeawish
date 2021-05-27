@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Events\ReferenceMail;
 use App\Events\WishGrantedMail;
 use App\Events\DeclineMail;
+use App\Events\NewRequest;
+use App\Listeners\SendNewRequestMail;
 use App\Listeners\SendReferenceNumber;
 use App\Listeners\SendGrantedMail;
 use App\Listeners\SendDeclinedMail;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         DeclineMail::class => [
             SendDeclinedMail::class,
+        ],
+        NewRequest::class => [
+            SendNewRequestMail::class,
         ],
     ];
     /**
