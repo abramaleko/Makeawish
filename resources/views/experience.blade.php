@@ -25,13 +25,13 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{$experience->email}}</h6>
             <p class="card-text">{{$experience->description}}</p>
             <p class="my-2 text-muted" style="font-size: 12px"><i>Created : {{$experience->created_at->diffForHumans()}}</i></p>
-            @if ((Auth::user()->admin) == true)
-              <form action="{{route('experience.destroy',$experience->id)}}" method="POST">
+             @auth
+             <form action="{{route('experience.destroy',$experience->id)}}" method="POST">
                 <button class="btn btn-danger">DELETE</button>
                 @method('DELETE')
                @csrf
             </form>
-            @endif
+             @endauth
             </div>
             <hr>
         @endforeach

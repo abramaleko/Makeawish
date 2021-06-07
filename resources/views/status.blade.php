@@ -26,47 +26,31 @@
 </style>
 @endsection
 @section('content')
-<div class="container">
-
-       <div class="my-3">
-        <form class="form-inline">
-             <label class="sr-only" for="requestee_name">Requestee name</label>
-             <div class="input-group mb-2 mr-sm-2">
-               <div class="input-group-prepend">
-                 <div class="input-group-text"><i class="fa fa-user"></i></div>
-               </div>
-               <input class="form-control" type="text" id="requestee_name" name="requestee_name" onkeyup="searchname(this.value)"  placeholder="Enter your name">
-                <div class="dropdown-search " id="dropdown-search">
-
-                </div>
+    <div class="container">
+        <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-wish-request-tab" data-toggle="pill" href="#pills-wish-request" role="tab" aria-controls="pills-wish-request" aria-selected="true">Wish Request</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-mystatus-tab" data-toggle="pill" href="#pills-mystatus" role="tab" aria-controls="pills-mystatus" aria-selected="false">My Status</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-allstatus-tab" data-toggle="pill" href="#pills-allstatus" role="tab" aria-controls="pills-allstatus" aria-selected="false">All Status</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-wish-request" role="tabpanel" aria-labelledby="pills-wish-request-tab">
+                @include('status.requests')
             </div>
-        </form>
-    </div>
-          <div id="statsdetails">
-              <h5 class="font-weight-bold">Completed wishes: <span class="text-primary" id="stats">&nbsp; </span></h5>
+            <div class="tab-pane fade" id="pills-mystatus" role="tabpanel" aria-labelledby="pills-mystatus-tab">
+                @include('status.mystats')
+            </div>
+            <div class="tab-pane fade" id="pills-allstatus" role="tabpanel" aria-labelledby="pills-allstatus-tab">
+                @include('status.allstatus')
+            </div>
           </div>
-    <div class="table-responsive-sm mt-5">
-        <table class="table table-hover">
-            <caption>Details of your request</caption>
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Amount (₹)</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date</th>
-
-              </tr>
-            </thead>
-            <tbody id="table-body">
-
-            </tbody>
-          </table>
     </div>
-
-
-</div>
 @endsection
-
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
  <script src="{{asset('js/moment.js')}}"></script>
@@ -141,4 +125,5 @@
        });
     }
   </script>
+
 @endsection

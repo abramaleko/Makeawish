@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ReferenceMail;
-use App\Events\DeclineMail;
+
+
 use App\Events\NewRequest;
 use App\Events\WishGrantedMail;
 use App\Exports\WishesExport;
@@ -15,15 +15,7 @@ use PDF;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -41,6 +33,21 @@ class HomeController extends Controller
         $wishes=Wishes::where('status','Pending wish')->orderBy('id','desc')->paginate(3);
         return view('wishes',['wishes'=> $wishes]);
     }
+
+    public function status()
+    {
+        $all_wishes=Wishes::orderBy('id','desc')->get();
+        $granted=Wishes::where('status','Granted')->count();
+        return view('status',['all_wishes'=> $all_wishes,'granted'=>$granted]);
+    }
+       //get the searched wish
+       public function getWish($id)
+       {
+          $wishes=Wishes::where('reference_code',$id)->get();
+          $all_wishes=Wishes::orderBy('id','desc')->get();
+          $granted=Wishes::where('status','Granted')->count();
+          return view('status',['wishes'=> $wishes,'all_wishes'=> $all_wishes,'granted'=>$granted]);
+       }
 
     //get the requests page
     public function request()
@@ -87,7 +94,7 @@ class HomeController extends Controller
          }
          catch (\Swift_TransportException $th) {
              //catch if the no internet connection
-             return redirect()->route('requests')->with('error','Failed to submit your wish please check your internet connection and try again.');
+             return redirect()->route('wishes')->with('error','Failed to submit your wish please check your internet connection and try again.');
          }
          $ins->reference_code=$reference_code;
          $ins->name=ucfirst($request->name);
@@ -97,57 +104,8 @@ class HomeController extends Controller
          $ins->description=$request->description;
          $ins->amount=$request->amount;
          $ins->save();
-         return redirect()->route('requests')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
+         return redirect()->route('wishes')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
     }
-
-    public function approveRequest($id)
-    {
-      $wish=Wishes::find($id);
-      $mail_data=array(
-        'name' => ucfirst($wish->name),
-        'email' => $wish->email,
-        'reference_code' => $wish->reference_code ,
-    );
-
-     try {
-
-        ReferenceMail::dispatch($mail_data);
-     }
-     catch (\Swift_TransportException $th) {
-         //catch if the no internet connection
-         return redirect()->route('requests')->with('error','Failed to approve '.$wish->name.' wish please check your internet connection and try again.');
-     }
-        $wish->status= "Pending wish";
-         $wish->save();
-      return redirect()->route('requests')->with('status','You have successfully approve '.$wish->name. ' wish' );
-    }
-
-    public function declineRequest(Request $request)
-    {
-       $request->validate([
-               'decline_reason' => 'required|string',
-           ]
-       );
-       $wish=Wishes::find($request->wish_id);
-       $mail_data=array(
-        'name' => ucfirst($wish->name),
-        'email' => $wish->email,
-        'reference_code' => $wish->reference_code ,
-    );
-       try {
-        DeclineMail::dispatch($mail_data);
-       } catch (\Swift_TransportException $th) {
-         //catch if the error in internet connection
-        return redirect()->route('requests')->with('error','Failed to decline '.$wish->name.' wish please check your internet connection and try again.');
-    }
-
-       $wish->decline_reason=$request->decline_reason;
-       $wish->status= 'Declined';
-       $wish->save();
-
-       return redirect()->route('requests')->with('status','A note with decline note has been sent to the requestee email');
-    }
-
 
     public function requestGrant(Request $request)
     {
@@ -175,12 +133,7 @@ class HomeController extends Controller
       return back()->with('status','Thank you for fulfilling'.$wish->name.' wish 🙏');
     }
 
-    //get the searched wish
-    public function getWish($id)
-    {
-       $wishes=Wishes::where('reference_code',$id)->get();
-       return view('request',['wishes'=> $wishes]);
-    }
+
 
     //updates the wish
     public function updateRequest(Request $request)
@@ -201,29 +154,20 @@ class HomeController extends Controller
         $wish->description=$request->description;
         $wish->amount=$request->amount;
         $wish->save();
-        return redirect()->route('requests')->with('status','Request updated successfully');
+        return redirect()->route('status')->with('status','Request updated successfully');
     }
 
     public function deleteRequest($id)
     {
         $wish=Wishes::find($id);
         $wish->forceDelete();
-
-        return redirect()->route('requests')->with('status','Request deleted successfully');
+        if (Auth::check())
+        //if admin is loged in
+        return redirect()->route('admin-status')->with('status','Request deleted successfully');
+        else
+        return redirect()->route('status')->with('status','Request deleted successfully');
     }
 
-    //shows the my stats page
-    public function stats()
-    {
-        return view('stats');
-    }
-
-    public function allStats()
-    {
-        $wishes=Wishes::orderBy('id','desc')->get();
-        $granted=Wishes::where('status','Granted')->count();
-        return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
-    }
 
     public function filterWishes(Request $request)
     {
@@ -232,33 +176,67 @@ class HomeController extends Controller
           case '1':
             $wishes=Wishes::orderBy('id','desc')->get();
             $granted=Wishes::where('status','Granted')->count();
-            return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+            //return if to admin wish data if user is loged in
+            if (Auth::check())
+                return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+            else
+            //if user is not loged in then return to common user page
+            return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
             break;
            case '2':
             $wishes=Wishes::orderBy('amount','desc')->get();
             $granted=Wishes::where('status','Granted')->count();
-            return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
-               break;
+             //return if to admin wish data if user is loged in
+             if (Auth::check())
+             return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+            else
+            //if user is not loged in then return to common user page
+            return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
+            break;
             case '3':
                 $wishes=Wishes::orderBy('amount','asc')->get();
                 $granted=Wishes::where('status','Granted')->count();
-                return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                 //return if to admin wish data if user is loged in
+                if (Auth::check())
+                return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+                else
+                //if user is not loged in then return to common user page
+                return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
                 break;
                 case '4':
                     $wishes=Wishes::where('status','Granted')->get();
                     $granted=Wishes::where('status','Granted')->count();
-                    return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
+                     //return if to admin wish data if user is loged in
+                    if (Auth::check())
+                    return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+                    else
+                    //if user is not loged in then return to common user page
+                    return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
                     break;
                   case '5':
                     $wishes=Wishes::where('status','Pending wish')->get();
                     $granted=Wishes::where('status','Granted')->count();
-                    return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
-                      break;
+                     //return if to admin wish data if user is loged in
+                    if (Auth::check())
+                    return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+                    else
+                    //if user is not loged in then return to common user page
+                    return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
+                    break;
                      case '6':
                         $wishes=Wishes::latest()->get();
                         $granted=Wishes::where('status','Granted')->count();
-                        return view('all-stats',['wishes'=> $wishes,'granted'=>$granted]);
-                         break;
+                         //return if to admin wish data if user is loged in
+                        if (Auth::check())
+                        return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+                        else
+                        //if user is not loged in then return to common user page
+                    return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
+                        break;
+                         default:
+                         {
+                            return redirect()->back();
+                         }
       }
     }
 
@@ -298,5 +276,11 @@ class HomeController extends Controller
      public function requestExcel()
      {
         return Excel::download(new WishesExport, 'wishes.xlsx');
+     }
+
+     //shows the contact page
+     public function contactUs()
+     {
+         return view('contact');
      }
 }

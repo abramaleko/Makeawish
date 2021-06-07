@@ -14,6 +14,14 @@
         {{ session('status') }}
     </div>
     @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    @guest
+      <button class="btn btn-primary py-2" data-toggle="modal" data-target="#newWish"><i class="fa fa-plus"></i>&nbsp;Add a New Wish</button>
+    @endguest
     <div class="card m-auto " id="wishes" style="width:45rem; border-radius:1rem;">
         @foreach ($wishes as $wish)
                 <div class="card-body">
@@ -25,8 +33,9 @@
             <p class=" mt-1 mb-2" style="font-size:16px">Amount needed: <span class="font-weight-bold">&nbsp;₹ {{$wish->amount}}</span></p>
             @endif
             <p class="my-2 text-muted" style="font-size: 12px"><i>Created : {{$wish->created_at->diffForHumans()}}</i></p>
+            @guest
             <a class="btn btn-success block" role="button" data-toggle="modal" data-target="#wish-grant{{$wish->id}}">Fulfil</a>
-
+            @endguest
                 {{-- Modal for granting user wish --}}
       <div class="modal fade" id="wish-grant{{$wish->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -79,4 +88,5 @@
 
 
 </div>
+@include('modals.newWish')
 @endsection

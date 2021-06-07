@@ -52,35 +52,39 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 16px;">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav mr-auto ">
-
                         <li class="nav-item">
-                            <a class="nav-link  {{Request::path() == 'home' ? 'active' : ''}}" href="{{ route('home') }}">{{ __('Home') }}</a>
+                            <a class="nav-link  {{Request::path() == 'wishes' ? 'active' : ''}}" href="{{ route('wishes') }}">{{ __('Make a wish') }}</a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link  {{Request::path() == 'wishes' ? 'active' : ''}}" href="{{ route('wishes') }}">{{ __('Wishes') }}</a>
+                            <a class="nav-link  {{Request::path() == 'admin/status' ? 'active' : ''}}" href="{{ route('admin-status') }}">{{ __('Status') }}</a>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle {{Request::path() == 'requests' || Request::path() == 'statistics' ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('Requests') }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{ route('requests') }}">Wish requests</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{{ route('stats') }}">My stats</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="{{ route('all-stats') }}">All stats</a>
-                            </div>
-                          </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'admin/all_wishes' || Request::path() =='filter/wishes' ? 'active' : ''}}" href="{{ route('admin-wishData') }}">{{ __('Wish Data') }}</a>
+                        </li>
                           <li class="nav-item">
                             <a class="nav-link  {{Request::path() == 'experience' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Feedback') }}</a>
                         </li>
-
-
                     </ul>
+                    @endauth
+
+                    @guest
+                    <ul class="navbar-nav mr-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'wishes' ? 'active' : ''}}" href="{{ route('wishes') }}">{{ __('Make a wish') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'status' || Request::path() =='filter/wishes' ? 'active' : ''}}" href="{{ route('status') }}">{{ __('Status') }}</a>
+                        </li>
+                          <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'experience' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Feedback') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  {{Request::path() == 'contact' ? 'active' : ''}}" href="{{ route('contact') }}">{{ __('Contact us') }}</a>
+                        </li>
+                    </ul>
+                    @endguest
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -88,7 +92,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Log in') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Admin Log in') }}</a>
                                 </li>
                             @endif
 
@@ -124,6 +128,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://use.fontawesome.com/467df1d241.js"></script>
     @yield('scripts')
-
 </body>
+  @yield('footer')
 </html>

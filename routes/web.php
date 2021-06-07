@@ -15,15 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/wishes', [App\Http\Controllers\HomeController::class, 'wishes'])->name('wishes');
 
-Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request'])->name('requests');
+Route::get('/status', [App\Http\Controllers\HomeController::class, 'status'])->name('status');
 
-Route::get('/statistics', [App\Http\Controllers\HomeController::class, 'stats'])->name('stats');
+Route::get('/admin/status', [App\Http\Controllers\AdminController::class, 'adminStatus'])->name('admin-status');
 
-Route::get('/all/statistics', [App\Http\Controllers\HomeController::class, 'allStats'])->name('all-stats');
+Route::get('/admin/all_wishes', [App\Http\Controllers\AdminController::class, 'wishData'])->name('admin-wishData');
 
 Route::post('/request/upload', [App\Http\Controllers\HomeController::class, 'Uploadrequest'])->name('upload-request');
 
@@ -35,9 +36,9 @@ Route::post('/request/update', [App\Http\Controllers\HomeController::class, 'upd
 
 Route::get('/request/delete/{id}', [App\Http\Controllers\HomeController::class, 'deleteRequest'])->name('delete-request');
 
-Route::get('/request/approve/{id}', [App\Http\Controllers\HomeController::class, 'approveRequest'])->name('approve-request');
+Route::get('/request/approve/{id}', [App\Http\Controllers\AdminController::class, 'approveRequest'])->name('approve-request');
 
-Route::post('/request/decline', [App\Http\Controllers\HomeController::class, 'declineRequest'])->name('decline-request');
+Route::post('/request/decline', [App\Http\Controllers\AdminController::class, 'declineRequest'])->name('decline-request');
 
 Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requestee_names'])->name('requestee-names');
 
@@ -51,3 +52,4 @@ Route::get('/filter/wishes', [App\Http\Controllers\HomeController::class, 'filte
 
 Route::resource('/experience',App\Http\Controllers\ExperienceController::class);
 
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact');
