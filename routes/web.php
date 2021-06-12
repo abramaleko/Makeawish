@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//auth routes
 Auth::routes(['register' => false]);
 
+//locale route
+Route::get('locale/{lang}',[App\Http\Controllers\LanguageController::class, 'setLanguage'])->name('locale');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

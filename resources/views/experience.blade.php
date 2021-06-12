@@ -15,7 +15,7 @@
     </div>
     @endif
     <div class="my-3">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newExperience"><i class="fa fa-plus"></i>&nbsp;Add Feedback</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newExperience"><i class="fa fa-plus"></i>&nbsp;@lang('Add Feedback')</button>
     </div>
 
     <div class="card m-auto " id="experiences" style="width:45rem; border-radius:1rem;">
@@ -24,10 +24,10 @@
                 <h5 class="card-title">{{$experience->name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{$experience->email}}</h6>
             <p class="card-text">{{$experience->description}}</p>
-            <p class="my-2 text-muted" style="font-size: 12px"><i>Created : {{$experience->created_at->diffForHumans()}}</i></p>
+            <p class="my-2 text-muted" style="font-size: 12px"><i>@lang('Created') : {{$experience->created_at->diffForHumans()}}</i></p>
              @auth
              <form action="{{route('experience.destroy',$experience->id)}}" method="POST">
-                <button class="btn btn-danger">DELETE</button>
+                <button class="btn btn-danger">@lang('DELETE')</button>
                 @method('DELETE')
                @csrf
             </form>

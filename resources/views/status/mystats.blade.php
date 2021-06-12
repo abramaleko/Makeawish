@@ -5,7 +5,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text"><i class="fa fa-user"></i></div>
             </div>
-            <input class="form-control" type="text" id="requestee_name" name="requestee_name" onkeyup="searchname(this.value)"  placeholder="Enter your name">
+            <input class="form-control" type="text" id="requestee_name" name="requestee_name" onkeyup="searchname(this.value)"  placeholder="@lang('Enter your name')">
              <div class="dropdown-search hidden " id="dropdown-search">
 
              </div>
@@ -13,17 +13,17 @@
      </form>
  </div>
        <div id="statsdetails">
-           <h5 class="font-weight-bold">Completed wishes: <span class="text-primary" id="stats">&nbsp; </span></h5>
+           <h5 class="font-weight-bold">@lang('Completed wishes'): <span class="text-primary" id="stats">&nbsp; </span></h5>
        </div>
  <div class="table-responsive-sm mt-5">
      <table class="table table-hover">
-         <caption>Details of your request</caption>
+         <caption>@lang('Details of your request')</caption>
          <thead>
            <tr>
-             <th scope="col">Name</th>
-             <th scope="col">Amount (₹)</th>
-             <th scope="col">Status</th>
-             <th scope="col">Date</th>
+             <th scope="col">@lang('Name')</th>
+             <th scope="col">@lang('Amount') (₹)</th>
+             <th scope="col">@lang('Status')</th>
+             <th scope="col">@lang('Date')</th>
 
            </tr>
          </thead>

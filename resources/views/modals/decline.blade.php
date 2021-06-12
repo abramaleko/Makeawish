@@ -3,7 +3,7 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Decline {{$wish->name}} wish</h5>
+            <h5 class="modal-title" id="exampleModalLabel">@lang('Decline') {{$wish->name}} @lang(' wish')</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -13,13 +13,13 @@
                     @csrf
                     <input type="hidden" name="wish_id" value="{{$wish->id}}">
                     <div class="form-group mb-2">
-                        <label for="decline_reason">Reason for declining this wish</label>
+                        <label for="decline_reason">@lang('Reason for declining this wish')</label>
                         <textarea class="form-control" name="decline_reason" id="decline_reason" rows="3"></textarea>
                     </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary" type="submit">Decline</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+            <button class="btn btn-primary" type="submit">@lang('Decline')</button>
             </div>
         </form>
         </div>

@@ -14,8 +14,8 @@
 </style>
 
 <div class="container">
-    <p id="header">Hello {{$mail_data['name']}},</p>
-    <p>Congratulations, your wish of reference number {{$mail_data['reference_code']}} has been approved by our team <a href="{{route('request',$mail_data['reference_code'])}}">Click here to view the wish</a></p>
-    <p>Thanks,</p>
-    <p>V-Group</p>
+    <p id="header">@lang('Hello') {{$mail_data['name']}},</p>
+    <p>@lang('Congratulations, your wish of reference number '){{$mail_data['reference_code']}} @lang('has been approved by our team ') <a href="{{route('request',$mail_data['reference_code'])}}">@lang('Click here for more details') </a></p>
+    <p>@lang('Thanks,')</p>
+    <p>@lang(config('app.name'))</p>
 </div>

@@ -9,6 +9,7 @@ use App\Events\WishGrantedMail;
 use App\Exports\WishesExport;
 use Illuminate\Http\Request;
 use App\Models\Wishes;
+use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -94,7 +95,7 @@ class HomeController extends Controller
          }
          catch (\Swift_TransportException $th) {
              //catch if the no internet connection
-             return redirect()->route('wishes')->with('error','Failed to submit your wish please check your internet connection and try again.');
+             return redirect()->route('wishes')->with('error', __('Failed to submit your wish please check your internet connection and try again'));
          }
          $ins->reference_code=$reference_code;
          $ins->name=ucfirst($request->name);
@@ -104,7 +105,7 @@ class HomeController extends Controller
          $ins->description=$request->description;
          $ins->amount=$request->amount;
          $ins->save();
-         return redirect()->route('wishes')->with('status','Your reference number is '.$reference_code. ' and you will be notified once your request is approved');
+         return redirect()->route('wishes')->with('status',__('Your reference number is ').$reference_code. __(' and you will be notified once your request is approved'));
     }
 
     public function requestGrant(Request $request)
@@ -122,7 +123,7 @@ class HomeController extends Controller
         WishGrantedMail::dispatch($mail_data);
     } catch (\Swift_TransportException $th) {
          //catch if the error in internet connection
-         return back()->with('error','Failed to grant '.$wish->name.' wish please check your internet connection and try again.');
+         return back()->with('error',__('Failed to grant ').$wish->name.__(' wish please check your internet connection and try again'));
     }
 
       $wish->status="Granted";
@@ -130,7 +131,7 @@ class HomeController extends Controller
       $wish->grant_email=$request->email;
       $wish->grant_phone_number=$request->phone_no;
       $wish->save();
-      return back()->with('status','Thank you for fulfilling'.$wish->name.' wish 🙏');
+      return back()->with('status',__('Thank you for fulfilling').$wish->name.__(' wish').' 🙏');
     }
 
 
@@ -154,7 +155,7 @@ class HomeController extends Controller
         $wish->description=$request->description;
         $wish->amount=$request->amount;
         $wish->save();
-        return redirect()->route('status')->with('status','Request updated successfully');
+        return redirect()->back()->with('status',__('Request updated successfully'));
     }
 
     public function deleteRequest($id)
@@ -163,9 +164,9 @@ class HomeController extends Controller
         $wish->forceDelete();
         if (Auth::check())
         //if admin is loged in
-        return redirect()->route('admin-status')->with('status','Request deleted successfully');
+        return redirect()->route('admin-status')->with('status',__('Request deleted successfully'));
         else
-        return redirect()->route('status')->with('status','Request deleted successfully');
+        return redirect()->route('status')->with('status',__('Request deleted successfully'));
     }
 
 

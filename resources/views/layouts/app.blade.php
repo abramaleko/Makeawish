@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ __(config('app.name')) }}</title>
 
 
 
@@ -43,8 +43,7 @@
                 <a class="navbar-brand mr-lg-5" href="{{ url('/') }}">
                     <img src="{{asset('icons/logo.png')}}" style="height: 3rem;
                     width: 3.4rem;" >
-                    {{ config('app.name', 'Laravel') }}
-
+                    {{ __(config('app.name', 'Laravel')) }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -114,6 +113,20 @@
                                     </form>
                             </li>
                         @endguest
+                        <!-- change language links -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             {{ strtoupper(app()->currentLocale())}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{route('locale','en')}}">English</a>
+                              <a class="dropdown-item" href="{{route('locale','hi')}}">Hindi</a>
+                              <a class="dropdown-item" href="#">Gujarati</a>
+                              <a class="dropdown-item" href="#">Marathi</a>
+
+
+                            </div>
+                          </li>
                     </ul>
                 </div>
             </div>

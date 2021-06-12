@@ -11,26 +11,26 @@
 
        <div class="my-5">
         <form class="form-inline" autocomplete="off">
-             <label class="sr-only" for="reference_code">Reference number</label>
+             <label class="sr-only" for="reference_code">@lang('Reference number')</label>
              <div class="input-group mb-2 mr-sm-2">
                <div class="input-group-prepend">
                  <div class="input-group-text"><i class="fa fa-search"></i></div>
                </div>
-               <input type="number" class="form-control" id="code" placeholder="Enter your reference number">
+               <input type="number" class="form-control" id="code" placeholder="@lang('Enter your reference number')">
              </div>
-             <button type="button" class="btn btn-outline-secondary mb-2" id="reference_code">Search</button>
+             <button type="button" class="btn btn-outline-secondary mb-2" id="reference_code">@lang('Search')</button>
         </form>
     </div>
     <div class="table-responsive-sm">
         <table class="table table-hover">
-            <caption>Details of your request</caption>
+            <caption>@lang('Details of your request')</caption>
             <thead>
               <tr>
-                <th scope="col">Reference number</th>
-                <th scope="col">Name</th>
-                <th scope="col">Amount (₹)</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date</th>
+                <th scope="col">@lang('Reference number')</th>
+                <th scope="col">@lang('Name')</th>
+                <th scope="col">@lang('Amount') (₹)</th>
+                <th scope="col">@lang('Status')</th>
+                <th scope="col">@lang('Date')</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -44,8 +44,8 @@
                     <td>{{$wish->amount}}</td>
                     <td>{{$wish->status}}</td>
                     <td>{{$wish->created_at->format('d M Y')}}</td>
-                    <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">Details</a></td>
-                    <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">Delete</a></td>
+                    <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">@lang('Details')</a></td>
+                    <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">@lang('Delete')</a></td>
                 </tr>
                 @include('modals.wishDetails')
                 @endforeach

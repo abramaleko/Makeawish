@@ -42,7 +42,7 @@ class ExperienceController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('experience.index')->with('status','Thanks for sharing your experience with us');
+        return redirect()->route('experience.index')->with('status',__('Thanks for sharing your experience with us'));
 
     }
 
@@ -55,6 +55,6 @@ class ExperienceController extends Controller
     public function destroy($id)
     {
         Experience::destroy($id);
-       return redirect()->back()->with('status','Feedback deleted successfully');
+       return redirect()->back()->with('status',__('Feedback deleted successfully'));
     }
 }

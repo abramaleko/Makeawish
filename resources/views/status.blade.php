@@ -29,13 +29,13 @@
     <div class="container">
         <ul class="nav nav-pills mb-3 nav-fill" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-wish-request-tab" data-toggle="pill" href="#pills-wish-request" role="tab" aria-controls="pills-wish-request" aria-selected="true">Wish Request</a>
+              <a class="nav-link active" id="pills-wish-request-tab" data-toggle="pill" href="#pills-wish-request" role="tab" aria-controls="pills-wish-request" aria-selected="true">@lang('Wish Request')</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-mystatus-tab" data-toggle="pill" href="#pills-mystatus" role="tab" aria-controls="pills-mystatus" aria-selected="false">My Status</a>
+              <a class="nav-link" id="pills-mystatus-tab" data-toggle="pill" href="#pills-mystatus" role="tab" aria-controls="pills-mystatus" aria-selected="false">@lang('My Status')</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-allstatus-tab" data-toggle="pill" href="#pills-allstatus" role="tab" aria-controls="pills-allstatus" aria-selected="false">All Status</a>
+              <a class="nav-link" id="pills-allstatus-tab" data-toggle="pill" href="#pills-allstatus" role="tab" aria-controls="pills-allstatus" aria-selected="false">@lang('All Status')</a>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">

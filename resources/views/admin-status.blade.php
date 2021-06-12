@@ -14,14 +14,14 @@
     @endif
     <div class="table-responsive-sm">
         <table class="table table-hover">
-            <caption>Details of your request</caption>
+            <caption>@lang('Details of your request')</caption>
             <thead>
               <tr>
-                <th scope="col">Reference number</th>
-                <th scope="col">Name</th>
-                <th scope="col">Amount (₹)</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date</th>
+                <th scope="col">@lang('Reference number')</th>
+                <th scope="col">@lang('Reference number')</th>
+                <th scope="col">@lang('Amount') (₹)</th>
+                <th scope="col">@lang('Status')</th>
+                <th scope="col">@lang('Date')</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -37,10 +37,10 @@
                     <td>{{$wish->amount}}</td>
                     <td>{{$wish->status}}</td>
                     <td>{{$wish->created_at->format('d M Y')}}</td>
-                    <td><a href="{{route('approve-request',$wish->id)}}" class="btn btn-primary rounded {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">Approve</a></td>
-                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">Decline</a></td>
-                   <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">Details</a></td>
-                   <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">Delete</a></td>
+                    <td><a href="{{route('approve-request',$wish->id)}}" class="btn btn-primary rounded {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">@lang('Approve')</a></td>
+                    <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">@lang('Decline')</a></td>
+                   <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">@lang('Details')</a></td>
+                   <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">@lang('Delete')</a></td>
                 </tr>
                 @include('modals.wishDetails')
                 @include('modals.decline')

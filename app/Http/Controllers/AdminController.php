@@ -38,11 +38,11 @@ class AdminController extends Controller
      }
      catch (\Swift_TransportException $th) {
          //catch if the no internet connection
-         return redirect()->route('admin-status')->with('error','Failed to approve '.$wish->name.' wish please check your internet connection and try again.');
+         return redirect()->route('admin-status')->with('error',__('Failed to approve').$wish->name.__(' wish please check your internet connection and try again'));
      }
         $wish->status= "Pending wish";
          $wish->save();
-      return redirect()->route('admin-status')->with('status','You have successfully approve '.$wish->name. ' wish' );
+      return redirect()->route('admin-status')->with('status',__('You have successfully approve ').$wish->name. __(' wish') );
     }
 
     public function declineRequest(Request $request)
@@ -61,14 +61,14 @@ class AdminController extends Controller
         DeclineMail::dispatch($mail_data);
        } catch (\Swift_TransportException $th) {
          //catch if the error in internet connection
-        return redirect()->route('admin-status')->with('error','Failed to decline '.$wish->name.' wish please check your internet connection and try again.');
+        return redirect()->route('admin-status')->with('error',__('Failed to decline ').$wish->name.__(' wish please check your internet connection and try again'));
     }
 
        $wish->decline_reason=$request->decline_reason;
        $wish->status= 'Declined';
        $wish->save();
 
-       return redirect()->route('admin-status')->with('status','A note with decline note has been sent to the requestee email');
+       return redirect()->route('admin-status')->with('status',__('A note with decline note has been sent to the requestee email'));
     }
 
     //shows all the wishes submitted

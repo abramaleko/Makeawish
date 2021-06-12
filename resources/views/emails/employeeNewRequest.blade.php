@@ -14,8 +14,9 @@
   </style>
 
   <div class="container">
-      <p id="header">Hello {{$mail_data['name']}},</p>
-      <p>Your request of reference number {{$mail_data['reference_code']}} has successfully be received by our team. We will notify you once your request has been approved </p>
-      <p>Thanks,</p>
-      <p>V-Group</p>
+      <p id="header">@lang('Hello') {{$mail_data['name']}},</p>
+      <p>@lang('Your request of reference number ') {{$mail_data['reference_code']}} @lang('has successfully be received by our team. We will notify you once your request has been approved') </p>
+      <p>@lang('Thanks,')<p>
+      <p>@lang(config('app.name'))</p>
   </div>
+
