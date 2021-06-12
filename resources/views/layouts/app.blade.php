@@ -121,10 +121,6 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{route('locale','en')}}">English</a>
                               <a class="dropdown-item" href="{{route('locale','hi')}}">Hindi</a>
-                              <a class="dropdown-item" href="#">Gujarati</a>
-                              <a class="dropdown-item" href="#">Marathi</a>
-
-
                             </div>
                           </li>
                     </ul>

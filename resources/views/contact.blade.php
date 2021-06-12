@@ -49,11 +49,11 @@
 @section('content')
     <div class="container contactus">
             <div style="margin-left: 4rem; margin-top: 2.5rem;" class=" text-content">
-                 <h1 class="font-weight-bold">Contact Us</h1>
-                 <p>You can email us at
+                 <h1 class="font-weight-bold">@lang('Contact us')</h1>
+                 <p>@lang('You can email us at ')
                     <a href = "mailto:vtodo@spentose.com?subject = Feedback&body = Message">vtodo@spentose.com</a></p>
-                  <p>Call us 91-22-68626202 / 203 / 206 / 222</p>
-                  <p>We are found at Alcon Biosciences, 3rd Floor  South Wing, the International building, above SBI bank, Maharshi Karve Road, Churchgate</p>
+                  <p>@lang('Call us ') 91-22-68626202 / 203 / 206 / 222</p>
+                  <p>@lang('We are found at Alcon Biosciences, 3rd Floor  South Wing, the International building, above SBI bank, Maharshi Karve Road, Churchgate')</p>
             </div>
     </div>
 @endsection

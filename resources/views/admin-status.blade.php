@@ -35,7 +35,7 @@
                     <td>{{$wish->reference_code}}</td>
                     <td>{{$wish->name}}</td>
                     <td>{{$wish->amount}}</td>
-                    <td>{{$wish->status}}</td>
+                    <td>@lang($wish->status)</td>
                     <td>{{$wish->created_at->format('d M Y')}}</td>
                     <td><a href="{{route('approve-request',$wish->id)}}" class="btn btn-primary rounded {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">@lang('Approve')</a></td>
                     <td><a role="button" data-toggle="modal" data-target="#decline-modal_{{$wish->id}}" class="btn btn-warning rounded text-dark {{$wish->status != 'Pending approval' ? 'disabled' : ''}}">@lang('Decline')</a></td>

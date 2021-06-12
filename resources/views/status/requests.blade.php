@@ -42,7 +42,7 @@
                     <td>{{$wish->reference_code}}</td>
                     <td>{{$wish->name}}</td>
                     <td>{{$wish->amount}}</td>
-                    <td>{{$wish->status}}</td>
+                    <td>@lang($wish->status)</td>
                     <td>{{$wish->created_at->format('d M Y')}}</td>
                     <td><a class="btn btn-success rounded" role="button" data-toggle="modal" data-target="#wish-detail_{{$wish->id}}">@lang('Details')</a></td>
                     <td><a href="{{route('delete-request',$wish->id)}}" class="btn btn-danger rounded">@lang('Delete')</a></td>

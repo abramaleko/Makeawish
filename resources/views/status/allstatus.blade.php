@@ -36,7 +36,7 @@
              <tr>
                  <td>{{$wish->name}}</td>
                  <td>{{$wish->amount}}</td>
-                 <td>{{$wish->status}}</td>
+                 <td>@lang($wish->status)</td>
                  <td>{{$wish->created_at->format('M d Y')}}</td>
              </tr>
             @endforeach
