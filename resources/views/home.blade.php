@@ -26,14 +26,20 @@
 
 @section('content')
 <div class="container">
-    <div class="border border-secondary px-3 mt-5 py-2">
-        <p class="home-message mt-3 text-justify">
-          @lang('Make-a-wish Foundation is a part of the V-group initiated by Mr. Vishal Jajodia. The proposed website is a platform specially designed for V-Group employees to write their wishes which would be fulfilled by anyone amongst the group only. It is a very unique idea adopted by  Mr. Advait Jajodia son of Mr. Vishal Jajodia Managing Director of V Group where an employee can freely put his wish in simple steps and he will be pleased to see the fulfillment of his wish from any corner of the establishment.')
+    <div class="px-3 py-2 mt-5 border border-secondary">
+        <p class="mt-3 text-justify home-message">
+          @lang('The Make a Wish platform is an online initiative by the V group leadership wherein employees falling under a certain salary bracket can post wishes.')
         </p>
-        <p class="home-message mt-3 text-justify">
-            @lang('You are all welcome to use V-Group Make a wish web application ')👐
+        <p class="mt-3 text-justify home-message">
+            @lang('These wishes can be something as simple as a small item (pencil box, apparel, instrument) or even an experience like a trip to a tourist attraction. The total cost of a  wish should be within the range of 3,000 to 10,000 rupees.')
         </p>
-        <div class="logo my-3">
+        <p class="mt-3 text-justify home-message">
+            @lang('These posted wishes will be fulfilled by higher management and employees in senior positions. Kindly contact Mrs. Prajakta Deshpande (hr@spentose.com) in HR for head office and Mr. Dheeraj Sharma (hrvapi@spentose.com) in HR for factory for any further clarifications or if your wish exceeds the given budget. Kindly contact Mr. Vivek Bhojwani (vtodo@spentose.com) in case of any technical assistance.')
+        </p>
+        <p class="mt-3 text-justify home-message">
+           @lang('Please share')
+        </p>
+        <div class="my-3 logo">
             <img src="{{asset('icons/logo.png')}}" alt="V-group logo" class="image-logo">
         </div>
     </div>

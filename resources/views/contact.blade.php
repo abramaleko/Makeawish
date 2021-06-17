@@ -59,6 +59,6 @@
 @endsection
 @section('footer')
     <footer>
-      V-Group: Make a wish &copy; 2021
+    @lang('Make a wish') &copy; 2021
     </footer>
 @endsection
