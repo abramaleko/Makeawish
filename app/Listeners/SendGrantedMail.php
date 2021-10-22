@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendGrantedMail
+class SendGrantedMail implements ShouldQueue
 {
     /**
      * Create the event listener.

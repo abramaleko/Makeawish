@@ -7,7 +7,7 @@ use App\Events\ReferenceMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendReferenceNumber
+class SendReferenceNumber implements ShouldQueue
 {
     /**
      * Create the event listener.

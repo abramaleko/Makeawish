@@ -32,15 +32,9 @@ class AdminController extends Controller
         'reference_code' => $wish->reference_code ,
     );
 
-     try {
-
         ReferenceMail::dispatch($mail_data);
-     }
-     catch (\Swift_TransportException $th) {
-         //catch if the no internet connection
-         return redirect()->route('admin-status')->with('error',__('Failed to approve').$wish->name.__(' wish please check your internet connection and try again'));
-     }
-        $wish->status= "Pending wish";
+
+         $wish->status= "Pending wish";
          $wish->save();
       return redirect()->route('admin-status')->with('status',__('You have successfully approve ').$wish->name. __(' wish') );
     }
@@ -57,12 +51,7 @@ class AdminController extends Controller
         'email' => $wish->email,
         'reference_code' => $wish->reference_code ,
     );
-       try {
         DeclineMail::dispatch($mail_data);
-       } catch (\Swift_TransportException $th) {
-         //catch if the error in internet connection
-        return redirect()->route('admin-status')->with('error',__('Failed to decline ').$wish->name.__(' wish please check your internet connection and try again'));
-    }
 
        $wish->decline_reason=$request->decline_reason;
        $wish->status= 'Declined';
