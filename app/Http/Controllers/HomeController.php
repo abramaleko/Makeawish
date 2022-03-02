@@ -31,7 +31,7 @@ class HomeController extends Controller
     //shows all wishes
     public function wishes()
     {
-        $wishes=Wishes::where('status','Pending wish')->orderBy('id','desc')->paginate(3);
+        $wishes=Wishes::where('status','Pending wish')->orderBy('id','desc')->paginate(25);
         return view('wishes',['wishes'=> $wishes]);
     }
 
