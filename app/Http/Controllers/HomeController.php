@@ -89,14 +89,14 @@ class HomeController extends Controller
             'email' => $request->email,
             'reference_code' => $reference_code ,
         );
-        // try {
+        try {
 
             NewRequest::dispatch($mail_data);
-        //  }
-        //  catch (\Swift_TransportException $th) {
-        //      //catch if the no internet connection
-        //      return redirect()->route('wishes')->with('error', __('Failed to submit your wish please check your internet connection and try again'));
-        //  }
+         }
+         catch (\Swift_TransportException $th) {
+             //catch if the no internet connection
+             return redirect()->route('wishes')->with('error', __('Failed to submit your wish please check your internet connection and try again'));
+         }
          $ins->reference_code=$reference_code;
          $ins->name=ucfirst($request->name);
          $ins->email=$request->email;
