@@ -135,7 +135,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="https://use.fontawesome.com/467df1d241.js"></script>
+    <script src="{{asset('js/font-awesome.js')}}"></script>
     @yield('scripts')
 </body>
   @yield('footer')
