@@ -110,6 +110,12 @@ class HomeController extends Controller
 
     public function requestGrant(Request $request)
     {
+     $request->validate([
+         'name' => 'required|string',
+         'email' => 'required|email',
+          'phone_no' => 'required',
+     ]);
+
       $wish=Wishes::find($request->id);
 
       //populates the array with the requestee name,grant_name,the grant_email and reference code
@@ -117,7 +123,8 @@ class HomeController extends Controller
         'grant_name' => ucfirst($request->name),
         'email' => $wish->email,
         'name' => $wish->name,
-        'reference_code' => $wish->reference_code
+        'reference_code' => $wish->reference_code,
+        'phone_no' => $request->phone_no,
     );
     try {
         WishGrantedMail::dispatch($mail_data);
@@ -131,7 +138,7 @@ class HomeController extends Controller
       $wish->grant_email=$request->email;
       $wish->grant_phone_number=$request->phone_no;
       $wish->save();
-      return back()->with('status',__('Thank you for fulfilling').$wish->name.__(' wish').' 🙏');
+      return back()->with('status',__('Thank you for fulfilling ').$wish->name.__(' wish').' 🙏');
     }
 
 
@@ -283,5 +290,10 @@ class HomeController extends Controller
      public function contactUs()
      {
          return view('contact');
+     }
+
+     public function showNewWish()
+     {
+         return view('new-wish');
      }
 }

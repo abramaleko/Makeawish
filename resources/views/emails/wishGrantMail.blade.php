@@ -26,8 +26,7 @@
     .visit-box
     {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin-bottom: 2rem;
         width: 50%;
         margin-top: 2rem;
     }
@@ -36,9 +35,15 @@
   <div class="container">
       <p id="header">@lang('Hello') {{$mail_data['name']}},</p>
 
-      <p>{{$mail_data['grant_name']}} @lang(' has just granted your wish of reference number ') {{$mail_data['reference_code']}} @lang('click the button for more details')</p>
+      <p>{{$mail_data['grant_name']}} @lang(' has just granted your wish of reference number ') {{$mail_data['reference_code']}}</p>
+      <p> <b>@lang('Contact Details') :</b> </p>
+      <p> @lang('Phone number'): {{$mail_data['phone_no']}}</p>
+      <p> @lang('Email') : {{$mail_data['email']}}</p>
+      <p>
+        @lang('Please do not forget to leave your feedback for us')
+      </p>
         <div class="visit-box">
-            <a href="{{route('request',$mail_data['reference_code'])}}" id="visit">@lang('Visit Wish')</a>
+            <a href="{{route('experience.index')}}" id="visit">@lang('Leave Feedback')</a>
         </div>
       <p>@lang('Thanks,')</p>
       <p>@lang(config('app.name'))</p>
