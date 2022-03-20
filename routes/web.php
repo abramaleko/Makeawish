@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +57,5 @@ Route::get('/filter/wishes', [App\Http\Controllers\HomeController::class, 'filte
 Route::resource('/experience',App\Http\Controllers\ExperienceController::class);
 
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact');
+
+Route::get('/newwish', [App\Http\Controllers\HomeController::class, 'showNewWish'])->name('new-wish');
