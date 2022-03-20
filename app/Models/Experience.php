@@ -18,5 +18,6 @@ class Experience extends Model
         'name',
         'email',
         'description',
+        'photo_attachment'
     ];
 }
