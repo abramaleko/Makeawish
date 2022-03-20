@@ -68,5 +68,14 @@ class AdminController extends Controller
         return view('wish-data',['all_wishes'=> $all_wishes,'granted'=>$granted]);
     }
 
+    public function approveAll()
+    {
+        Wishes::where('status', 'Pending approval')
+        ->update(['status' => 'Pending wish']);
+
+        return redirect()->route('admin-status')->with('status','You have approved all pending approval wishes' );
+
+    }
+
 
 }

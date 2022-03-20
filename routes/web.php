@@ -59,3 +59,5 @@ Route::resource('/experience',App\Http\Controllers\ExperienceController::class);
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact');
 
 Route::get('/newwish', [App\Http\Controllers\HomeController::class, 'showNewWish'])->name('new-wish');
+
+Route::get('/admin/approve/all',[App\Http\Controllers\AdminController::class, 'approveAll'])->name('approve-all');

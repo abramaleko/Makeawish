@@ -2,6 +2,7 @@
 
 @section('content')
    <div class="container">
+       <a href="{{route('approve-all')}}" class="btn btn-outline-primary btn-lg mb-4">APPROVE ALL PENDING WISHES</a>
         @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
