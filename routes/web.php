@@ -48,7 +48,7 @@ Route::post('/request_names', [App\Http\Controllers\HomeController::class, 'requ
 
 Route::post('/request_info', [App\Http\Controllers\HomeController::class, 'requestInfo'])->name('request-info');
 
-Route::get('/pdf/wishes', [App\Http\Controllers\HomeController::class, 'requestPdf'])->name('request-pdf');
+Route::get('/pdf/wishes/{filter?}', [App\Http\Controllers\HomeController::class, 'requestPdf'])->name('request-pdf');
 
 Route::GET('/excel/request', [App\Http\Controllers\HomeController::class, 'requestExcel'])->name('request-excel');
 

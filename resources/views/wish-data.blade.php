@@ -5,7 +5,7 @@
         <h5 class="font-weight-bold">@lang('Completed wishes'): <span class="text-primary">&nbsp; {{$granted}} / {{count($all_wishes)}}</span></h5>
     </div>
     <div class="my-3">
-        <a href="{{route('request-pdf')}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;@lang('PRINT')</a>
+        <a href="{{route('request-pdf',Request::get('filter'))}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;@lang('PRINT')</a>
         <a href="{{route('request-excel')}}" target="_blank" class="btn btn-success px-3 ml-3">&nbsp;@lang('EXCEL FILE')</a>
     </div>
     <div class="">
@@ -19,6 +19,7 @@
                <option value="4" {{Request::get('filter') == 4 ? 'selected' : ''}}>@lang('Lowest Price')</option>
                <option value="5" {{Request::get('filter') == 5 ? 'selected' : ''}}>@lang('Pending Wishes')</option>
                <option value="6" {{Request::get('filter') == 6 ? 'selected' : ''}}>@lang('Recent Wishes')</option>
+               <option value="7" {{Request::get('filter') == 7 ? 'selected' : ''}}>@lang('Granted Wishes')</option>
             </select>
             <button type="submit" class="btn btn-outline-primary mb-2 px-4">@lang('Filter')</button>
           </form>

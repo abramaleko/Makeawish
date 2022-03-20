@@ -241,6 +241,16 @@ class HomeController extends Controller
                         //if user is not loged in then return to common user page
                     return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
                         break;
+                        case '7':
+                            $wishes=Wishes::where('status','Granted')->get();
+                            $granted=Wishes::where('status','Granted')->count();
+                                //return if to admin wish data if user is loged in
+                            if (Auth::check())
+                            return view('wish-data',['all_wishes'=> $wishes,'granted'=>$granted]);
+                            else
+                           //if user is not loged in then return to common user page
+                            return view('status',['all_wishes'=> $wishes,'granted'=>$granted]);
+                            break;
                          default:
                          {
                             return redirect()->back();
@@ -270,11 +280,44 @@ class HomeController extends Controller
        return json_encode($data);
      }
 
-     public function requestPdf()
+     public function requestPdf($filter=1)
      {
-        $wishes=Wishes::orderBy('id','desc')->get();
+        switch ($filter) {
+            case '1':
+                $wishes=Wishes::orderBy('id','desc')->get();
+                $granted=Wishes::where('status','Granted')->count();
+                break;
+                case '2':
+                    $wishes=Wishes::orderBy('amount','desc')->get();
+                    $granted=Wishes::where('status','Granted')->count();
+                    break;
+                    case '3':
+                        $wishes=Wishes::orderBy('amount','asc')->get();
+                        $granted=Wishes::where('status','Granted')->count();
+                        break;
+                        case '4':
+                            $wishes=Wishes::where('status','Granted')->get();
+                            $granted=Wishes::where('status','Granted')->count();
+                            break;
+                            case '5':
+                                $wishes=Wishes::where('status','Pending wish')->get();
+                                $granted=Wishes::where('status','Granted')->count();
+                                break;
+                                case '6':
+                                    $wishes=Wishes::latest()->get();
+                                    $granted=Wishes::where('status','Granted')->count();
+                                    break;
+                                    case '7':
+                                        $wishes=Wishes::where('status','Granted')->get();
+                                        $granted=Wishes::where('status','Granted')->count();
+                                        break;
 
-        $granted=Wishes::where('status','Granted')->count();
+            default:
+            $wishes=Wishes::orderBy('id','desc')->get();
+            $granted=Wishes::where('status','Granted')->count();
+                break;
+        }
+
 
         $pdf = PDF::loadView('pdf.wishes',compact('wishes','granted'));
 
