@@ -5,7 +5,7 @@
         <h5 class="font-weight-bold">@lang('Completed wishes'): <span class="text-primary">&nbsp; {{$granted}} / {{count($all_wishes)}}</span></h5>
     </div>
     <div class="my-3">
-        <a href="{{route('request-pdf',Request::get('filter'))}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;@lang('PRINT')</a>
+        <a href="{{route('request-pdf',Request::get('filter'))}}" target="_blank" class="btn btn-dark px-3"><i class="fa fa-print px-2"></i>&nbsp;@lang('PDF')</a>
         <a href="{{route('request-excel')}}" target="_blank" class="btn btn-success px-3 ml-3">&nbsp;@lang('EXCEL FILE')</a>
     </div>
     <div class="">
