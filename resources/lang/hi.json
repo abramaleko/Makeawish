@@ -1,4 +1,5 @@
 {
+    "Contact Details": "सम्पर्क करने का विवरण",
     "30 Days": "30 दिन",
     "60 Days": "60 दिन",
     "90 Days": "90 दिन",
@@ -717,6 +718,7 @@
     "youremail@domain.com": "तुम्हारा ईमेल@डोमेन.कॉम",
     "Enter your full name" : "अपना पूरा नाम भरें",
     "Enter your phone number" : "अपना फोन नंबर डालें",
+    "Phone Number": "फ़ोन नंबर",
     "Enter your employement code number": "अपना रोजगार कोड नंबर दर्ज करें",
     "Describe what do you need": "वर्णन करें कि आपको क्या चाहिए",
     "Enter the amount needed for your need (Optional)": "अपनी आवश्यकता के लिए आवश्यक राशि दर्ज करें (वैकल्पिक)",
@@ -742,6 +744,7 @@
     "Granted Wishes": "दी गई शुभकामनाएं",
     "Pending Wishes": "लंबित शुभकामनाएं",
     "Recent Wishes": "हाल की शुभकामनाएं",
+    "Please do not forget to leave your feedback for us": "कृपया हमारे लिए अपनी प्रतिक्रिया देना न भूलें",
     "Filter": "फ़िल्टर",
     "Add Feedback": "अपना अनुभव जोड़ें",
     "Add your experience": "अपना अनुभव जोड़ें",
