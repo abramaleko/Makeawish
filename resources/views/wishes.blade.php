@@ -23,11 +23,12 @@
     <a href="{{route('new-wish')}}" class="btn btn-success py-2"><i class="fa fa-plus"></i>&nbsp; @lang('Add a New Wish')</a>
     @endguest
     <div class="container my-4" id="wishes">
+        <h2 class="text-center font-weight-bold pb-2">Wish List</h2>
        @foreach ($wishes->chunk(2) as $chunked_data)
-       <div class="row hidden-md-up my-2">
+       <div class="row hidden-md-up my-3">
           @foreach ($chunked_data as $wish)
           <div class="col-md-6">
-            <div class="card">
+            <div class="card rounded">
               <div class="card-block p-4">
                 <h4 class="card-title">{{$wish->name}}</h4>
                 <h6 class="card-subtitle text-muted pb-2">{{$wish->email}}</h6>
