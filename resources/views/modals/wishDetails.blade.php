@@ -24,7 +24,7 @@
 
                     <div class="form-group mb-2">
                         <label for="phone_no">@lang('Phone number')</label>
-                        <input type="number" name="phone_no" class="form-control" aria-label="phone_no" value="{{$wish->phone_number}}">
+                        <input type="tel" name="phone_no" class="form-control" aria-label="phone_no" value="{{$wish->phone_number}}">
                     </div>
 
                     <div class="form-group mb-2">
@@ -40,7 +40,7 @@
                         <div class="input-group-prepend">
                         <span class="input-group-text"><img src="{{asset('icons/rupee.svg')}}" class="inline" width="11"></span>
                         </div>
-                        <input type="number" name="amount" class="form-control" aria-label="Amount" value="{{$wish->amount}}" >
+                        <input type="number" name="amount" class="form-control" aria-label="Amount" value="{{$wish->amount}}" max="5000" >
                     </div>
 
                     {{-- if the wish is granted then show the granted user details --}}
