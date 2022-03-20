@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendDeclinedMail implements ShouldQueue
+class SendDeclinedMail 
 {
     /**
      * Create the event listener.
