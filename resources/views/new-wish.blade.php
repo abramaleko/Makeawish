@@ -91,7 +91,7 @@
                          </div>
                     </div>
                     <div class="row justify-content-between text-left">
-                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">@lang('Enter the amount needed for your need') (Rupees) </label> <input type="number" id="ans" name="amount" placeholder="" onblur="validate(6)" max="5000"> </div>
+                        <div class="form-group col-6 flex-column d-flex"> <label class="form-control-label px-3">@lang('Enter the amount needed for your need') (Rupees) </label> <input type="number" id="ans" name="amount" placeholder="" onblur="validate(6)" max="10000"> </div>
                     </div>
                     <div class="row justify-content-start">
                         <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Request</button> </div>
