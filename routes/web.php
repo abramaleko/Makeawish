@@ -61,3 +61,7 @@ Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactUs']
 Route::get('/newwish', [App\Http\Controllers\HomeController::class, 'showNewWish'])->name('new-wish');
 
 Route::get('/admin/approve/all',[App\Http\Controllers\AdminController::class, 'approveAll'])->name('approve-all');
+
+Route::get('/grants/send_mail',[App\Http\Controllers\ThanksController::class,'index'])->name('grants-mail.show');
+
+Route::post('/grants/send_mail',[App\Http\Controllers\ThanksController::class,'sendMail'])->name('grants-mail.send');

@@ -62,9 +62,16 @@
                         <li class="nav-item">
                             <a class="nav-link  {{Request::path() == 'admin/all_wishes' || Request::path() =='filter/wishes' ? 'active' : ''}}" href="{{ route('admin-wishData') }}">{{ __('Wish Data') }}</a>
                         </li>
-                          <li class="nav-item">
-                            <a class="nav-link  {{Request::path() == 'experience' ? 'active' : ''}}" href="{{ route('experience.index') }}">{{ __('Feedback') }}</a>
-                        </li>
+                        <!-- Dropdown -->
+                        <li class="nav-item dropdown {{Route::is(['experience.index','grants-mail.show']) ? 'active' : ''}}">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                {{ __('Feedback') }}
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item {{Request::path() == 'experience' ? 'active' : ''}}" href="{{ route('experience.index') }}">View Feedbacks</a>
+                                <a class="dropdown-item {{Request::path() == 'grants/send_mail' ? 'active' : ''}}" href="{{route('grants-mail.show')}}">Gratitude Email</a>
+                            </div>
+                            </li>
                     </ul>
                     @endauth
 

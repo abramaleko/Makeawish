@@ -16,7 +16,8 @@
   }
   .dropdowns:hover
   {
-     background-color: #D1D5DB;
+     background-color: #276bd1;
+     color: #ffffff;
      cursor: pointer;
   }
   #statsdetails
